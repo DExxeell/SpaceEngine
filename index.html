@@ -6,9 +6,10 @@
     <title>SpaceEngine Search</title>
     <script async src="https://cse.google.com/cse.js?cx=f117110d5d64d4bb0"></script>
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
             font-family: Arial, sans-serif;
             background: linear-gradient(180deg, #4B0082, #8A2BE2);
             animation: backgroundAnimation 10s ease infinite;
@@ -23,10 +24,11 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
             text-align: center;
             z-index: 1;
         }
@@ -47,6 +49,8 @@
             border-radius: 5px;
             padding: 10px;
             display: inline-block;
+            width: 100%;
+            max-width: 500px;
         }
 
         .logo {
@@ -81,4 +85,6 @@
     <footer>Powered by Google Custom Search</footer>
 </body>
 </html>
+
+
 
