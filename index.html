@@ -14,7 +14,7 @@
             background: linear-gradient(180deg, #4B0082, #8A2BE2);
             animation: backgroundAnimation 10s ease infinite;
             color: white;
-            overflow: auto; /* Allow scrolling */
+            overflow: auto;
         }
 
         @keyframes backgroundAnimation {
@@ -30,7 +30,7 @@
             align-items: center;
             padding: 20px;
             z-index: 1;
-            min-height: 100vh; /* Ensure the container takes at least full height */
+            min-height: 100vh;
         }
 
         h1 {
@@ -66,6 +66,26 @@
             100% { transform: translateY(-10px); }
         }
 
+        .filters {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-button {
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .filter-button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
         footer {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 10px 20px;
@@ -81,16 +101,22 @@
     <div class="container">
         <div class="logo">SpaceEngine</div>
         <h1>Search the Universe</h1>
+        <div class="filters">
+            <button class="filter-button">Images</button>
+            <button class="filter-button">Videos</button>
+            <button class="filter-button">News</button>
+            <button class="filter-button">Favorites</button>
+        </div>
         <div class="gcse-search"></div>
     </div>
     <footer>Powered by Google Custom Search</footer>
+
+    <script>
+        // Placeholder for future functionality
+        const favoritesButton = document.querySelector('.filter-button:last-child');
+        favoritesButton.addEventListener('click', () => {
+            alert('Favorites feature coming soon!');
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
