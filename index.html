@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrome-like Tabs with Search</title>
+    <title>SpaceEngine Search with Chrome-like Tabs</title>
     <script async src="https://cse.google.com/cse.js?cx=f117110d5d64d4bb0"></script>
     <style>
         body, html {
@@ -11,16 +11,79 @@
             padding: 0;
             height: 100%;
             font-family: Arial, sans-serif;
-            background: #F5F5F5;
-            color: black;
+            background: linear-gradient(180deg, #4B0082, #8A2BE2);
+            animation: backgroundAnimation 10s ease infinite;
+            color: white;
+            overflow: auto; /* Allow scrolling */
         }
 
+        @keyframes backgroundAnimation {
+            0% { background: #4B0082; }
+            50% { background: #8A2BE2; }
+            100% { background: #4B0082; }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 1;
+            min-height: 100vh; /* Ensure the container takes at least full height */
+        }
+
+        h1 {
+            font-size: 3em;
+            animation: fadeIn 2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .gcse-search {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            display: inline-block;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .logo {
+            font-size: 4em;
+            font-weight: bold;
+            color: #FF69B4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            animation: logoAnimation 1.5s ease infinite alternate;
+        }
+
+        @keyframes logoAnimation {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Chrome-like Tab Style */
         .tabs-container {
             display: flex;
             align-items: center;
             background-color: #E0E0E0;
             padding: 5px;
             border-bottom: 2px solid #C0C0C0;
+            width: 100%;
         }
 
         .tab {
@@ -71,20 +134,6 @@
             display: block;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .gcse-search {
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            padding: 10px;
-            display: inline-block;
-            width: 100%;
-            max-width: 500px;
-        }
     </style>
 </head>
 <body>
@@ -99,11 +148,14 @@
 
     <!-- Tab Content -->
     <div id="tab1" class="tab-content active">
-        <h1>Search the Universe - New Tab 1</h1>
-        <div class="gcse-search"></div>
+        <div class="container">
+            <div class="logo">SpaceEngine</div>
+            <h1>Search the Universe</h1>
+            <div class="gcse-search"></div>
+        </div>
     </div>
 
-    <footer>Powered by Chrome-like Tab System with Search</footer>
+    <footer>Powered by Google Custom Search</footer>
 
     <script>
         let tabCount = 1;
@@ -144,8 +196,11 @@
             newTabContent.id = newTabId;
             newTabContent.className = 'tab-content';
             newTabContent.innerHTML = `
-                <h1>Search the Universe - New Tab ${tabCount}</h1>
-                <div class="gcse-search"></div>`;
+                <div class="container">
+                    <div class="logo">SpaceEngine</div>
+                    <h1>Search the Universe</h1>
+                    <div class="gcse-search"></div>
+                </div>`;
             document.body.appendChild(newTabContent);
 
             // Automatically switch to the newly created tab
