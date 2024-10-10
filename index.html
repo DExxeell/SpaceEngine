@@ -75,15 +75,105 @@
             text-align: center;
             width: 100%;
         }
+
+        /* Tab Navigation */
+        .tab {
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .tab button {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: background-color 0.3s ease;
+            color: white;
+            font-size: 1.2em;
+            width: 33.33%; /* Divide evenly for 3 tabs */
+        }
+
+        .tab button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .tab button.active {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Tab content */
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">SpaceEngine</div>
-        <h1>Search the Universe</h1>
-        <div class="gcse-search"></div>
+
+        <!-- Tab Navigation -->
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'search')">Search</button>
+            <button class="tablinks" onclick="openTab(event, 'news')">News</button>
+            <button class="tablinks" onclick="openTab(event, 'about')">About</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="search" class="tab-content active">
+            <h1>Search the Universe</h1>
+            <div class="gcse-search"></div>
+        </div>
+
+        <div id="news" class="tab-content">
+            <h1>Latest Space News</h1>
+            <p>Get the latest news on space exploration, NASA, and beyond!</p>
+        </div>
+
+        <div id="about" class="tab-content">
+            <h1>About SpaceEngine</h1>
+            <p>SpaceEngine is your gateway to exploring the universe. Search for celestial bodies, read news, and discover fascinating details about the cosmos.</p>
+        </div>
     </div>
+
     <footer>Powered by Google Custom Search</footer>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+
+            // Hide all tab contents
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Remove the "active" class from all tab buttons
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+    </script>
 </body>
 </html>
-
