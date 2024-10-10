@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrome-like Tabs</title>
+    <title>Chrome-like Tabs with Search</title>
+    <script async src="https://cse.google.com/cse.js?cx=f117110d5d64d4bb0"></script>
     <style>
         body, html {
             margin: 0;
@@ -35,7 +36,7 @@
 
         .tab.active {
             background-color: #F1F1F1;
-            border-bottom: 2px solid #F5F5F5; /* Simulates Chrome tab look */
+            border-bottom: 2px solid #F5F5F5;
         }
 
         .tab button {
@@ -74,6 +75,16 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        .gcse-search {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            display: inline-block;
+            width: 100%;
+            max-width: 500px;
+        }
     </style>
 </head>
 <body>
@@ -88,11 +99,11 @@
 
     <!-- Tab Content -->
     <div id="tab1" class="tab-content active">
-        <h1>Welcome to New Tab</h1>
-        <p>This is the content of the first New Tab.</p>
+        <h1>Search the Universe - New Tab 1</h1>
+        <div class="gcse-search"></div>
     </div>
 
-    <footer>Powered by Chrome-like Tab System</footer>
+    <footer>Powered by Chrome-like Tab System with Search</footer>
 
     <script>
         let tabCount = 1;
@@ -132,7 +143,9 @@
             const newTabContent = document.createElement('div');
             newTabContent.id = newTabId;
             newTabContent.className = 'tab-content';
-            newTabContent.innerHTML = `<h1>Welcome to New Tab ${tabCount}</h1><p>This is the content of the new tab ${tabCount}.</p>`;
+            newTabContent.innerHTML = `
+                <h1>Search the Universe - New Tab ${tabCount}</h1>
+                <div class="gcse-search"></div>`;
             document.body.appendChild(newTabContent);
 
             // Automatically switch to the newly created tab
