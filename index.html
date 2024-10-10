@@ -3,164 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpaceEngine Search</title>
-    <script async src="https://cse.google.com/cse.js?cx=f117110d5d64d4bb0"></script>
+    <title>Chrome-like Tabs</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             font-family: Arial, sans-serif;
-            background: linear-gradient(180deg, #4B0082, #8A2BE2);
-            animation: backgroundAnimation 10s ease infinite;
-            color: white;
-            overflow: auto;
+            background: #F5F5F5;
+            color: black;
         }
 
-        @keyframes backgroundAnimation {
-            0% { background: #4B0082; }
-            50% { background: #8A2BE2; }
-            100% { background: #4B0082; }
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 1;
-            min-height: 100vh;
-        }
-
-        h1 {
-            font-size: 3em;
-            animation: fadeIn 2s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .gcse-search {
-            margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            padding: 10px;
-            display: inline-block;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .logo {
-            font-size: 4em;
-            font-weight: bold;
-            color: #FF69B4;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            animation: logoAnimation 1.5s ease infinite alternate;
-        }
-
-        @keyframes logoAnimation {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-
-        footer {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            position: relative;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9em;
-            text-align: center;
-            width: 100%;
-        }
-
-        /* Tabs */
-        .tabs {
+        .tabs-container {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            padding: 10px;
-            width: 100%;
-            max-width: 500px;
+            background-color: #E0E0E0;
+            padding: 5px;
+            border-bottom: 2px solid #C0C0C0;
         }
 
         .tab {
-            display: flex;
-            justify-content: space-between;
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 10px;
-            border-radius: 5px;
+            background-color: #FFFFFF;
+            border: 1px solid #C0C0C0;
+            border-radius: 8px 8px 0 0;
+            padding: 10px 15px;
             margin-right: 5px;
             cursor: pointer;
-            color: white;
+            display: flex;
+            align-items: center;
         }
 
         .tab.active {
-            background-color: rgba(255, 255, 255, 0.4);
+            background-color: #F1F1F1;
+            border-bottom: 2px solid #F5F5F5; /* Simulates Chrome tab look */
         }
 
         .tab button {
             background: none;
             border: none;
+            margin-left: 10px;
             color: red;
             cursor: pointer;
-            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .new-tab-button {
+            background-color: #E0E0E0;
+            border: 1px solid #C0C0C0;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 20px;
         }
 
         .tab-content {
             display: none;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-            width: 100%;
-            max-width: 500px;
+            background-color: #FFFFFF;
+            border: 1px solid #C0C0C0;
+            border-radius: 0 8px 8px 8px;
+            margin-top: -1px;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        .add-tab-button {
-            background-color: rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
+        footer {
+            text-align: center;
+            margin-top: 20px;
         }
-
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">SpaceEngine</div>
 
-        <!-- Tab Navigation -->
-        <div class="tabs" id="tabs">
-            <div class="tab active" data-tab="tab1">
-                Search <button onclick="closeTab(event, 'tab1')">x</button>
-            </div>
+    <!-- Tabs Container -->
+    <div class="tabs-container" id="tabs-container">
+        <div class="tab active" data-tab="tab1">
+            Tab 1 <button onclick="closeTab(event, 'tab1')">x</button>
         </div>
-
-        <!-- Add new tab button -->
-        <div class="add-tab-button" onclick="addNewTab()">+ Add New Tab</div>
-
-        <!-- Tab Content -->
-        <div id="tab1" class="tab-content active">
-            <h1>Search the Universe</h1>
-            <div class="gcse-search"></div>
-        </div>
+        <div class="new-tab-button" onclick="addNewTab()">+</div>
     </div>
 
-    <footer>Powered by Google Custom Search</footer>
+    <!-- Tab Content -->
+    <div id="tab1" class="tab-content active">
+        <h1>Welcome to Tab 1</h1>
+        <p>This is the content of Tab 1.</p>
+    </div>
+
+    <footer>Powered by Chrome-like Tab System</footer>
 
     <script>
         let tabCount = 1;
 
-        function openTab(evt, tabId) {
+        // Function to switch between tabs
+        function switchTab(evt, tabId) {
             // Hide all tab content
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => content.classList.remove('active'));
@@ -169,39 +107,41 @@
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            // Show current tab content and set tab active
+            // Show the clicked tab's content and set the tab to active
             document.getElementById(tabId).classList.add('active');
             evt.currentTarget.classList.add('active');
         }
 
+        // Function to add a new tab
         function addNewTab() {
             tabCount++;
             const newTabId = 'tab' + tabCount;
-            const tabsContainer = document.getElementById('tabs');
+            const tabsContainer = document.getElementById('tabs-container');
 
             // Create new tab element
             const newTab = document.createElement('div');
             newTab.className = 'tab';
             newTab.setAttribute('data-tab', newTabId);
-            newTab.innerHTML = `Search ${tabCount} <button onclick="closeTab(event, '${newTabId}')">x</button>`;
+            newTab.innerHTML = `Tab ${tabCount} <button onclick="closeTab(event, '${newTabId}')">x</button>`;
             newTab.onclick = function(event) {
-                openTab(event, newTabId);
+                switchTab(event, newTabId);
             };
-            tabsContainer.appendChild(newTab);
+            tabsContainer.insertBefore(newTab, tabsContainer.querySelector('.new-tab-button'));
 
             // Create new tab content element
             const newTabContent = document.createElement('div');
             newTabContent.id = newTabId;
             newTabContent.className = 'tab-content';
-            newTabContent.innerHTML = `<h1>Search Tab ${tabCount}</h1><div class="gcse-search"></div>`;
-            document.body.querySelector('.container').appendChild(newTabContent);
+            newTabContent.innerHTML = `<h1>Welcome to Tab ${tabCount}</h1><p>This is the content of Tab ${tabCount}.</p>`;
+            document.body.appendChild(newTabContent);
 
-            // Update the search for the new tab
-            new google.search.cse.element.render({ div: newTabContent.querySelector('.gcse-search') });
+            // Automatically switch to the newly created tab
+            switchTab({currentTarget: newTab}, newTabId);
         }
 
+        // Function to close a tab
         function closeTab(evt, tabId) {
-            evt.stopPropagation(); // Stop click event from switching tabs
+            evt.stopPropagation(); // Prevent tab from switching when closing it
 
             // Don't allow closing of the first tab
             if (tabId === 'tab1') {
@@ -221,14 +161,13 @@
                 tabElement.remove();
             }
 
-            // If the active tab is closed, switch to the first tab
-            const activeTab = document.querySelector('.tab.active');
-            if (!activeTab) {
-                document.querySelector('[data-tab="tab1"]').classList.add('active');
+            // If the closed tab was active, switch to the first tab
+            if (tabElement.classList.contains('active')) {
+                const firstTab = document.querySelector('.tab[data-tab="tab1"]');
+                firstTab.classList.add('active');
                 document.getElementById('tab1').classList.add('active');
             }
         }
     </script>
 </body>
 </html>
-
