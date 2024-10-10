@@ -203,6 +203,12 @@
                 </div>`;
             document.body.appendChild(newTabContent);
 
+            // Re-initialize Google Custom Search on the new tab
+            google.search.cse.element.render({
+                div: newTabContent.querySelector('.gcse-search'),
+                tag: 'search'
+            });
+
             // Automatically switch to the newly created tab
             switchTab({currentTarget: newTab}, newTabId);
         }
