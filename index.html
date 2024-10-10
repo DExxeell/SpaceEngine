@@ -81,15 +81,15 @@
     <!-- Tabs Container -->
     <div class="tabs-container" id="tabs-container">
         <div class="tab active" data-tab="tab1">
-            Tab 1 <button onclick="closeTab(event, 'tab1')">x</button>
+            New Tab <button onclick="closeTab(event, 'tab1')">x</button>
         </div>
         <div class="new-tab-button" onclick="addNewTab()">+</div>
     </div>
 
     <!-- Tab Content -->
     <div id="tab1" class="tab-content active">
-        <h1>Welcome to Tab 1</h1>
-        <p>This is the content of Tab 1.</p>
+        <h1>Welcome to New Tab</h1>
+        <p>This is the content of the first New Tab.</p>
     </div>
 
     <footer>Powered by Chrome-like Tab System</footer>
@@ -122,7 +122,7 @@
             const newTab = document.createElement('div');
             newTab.className = 'tab';
             newTab.setAttribute('data-tab', newTabId);
-            newTab.innerHTML = `Tab ${tabCount} <button onclick="closeTab(event, '${newTabId}')">x</button>`;
+            newTab.innerHTML = `New Tab <button onclick="closeTab(event, '${newTabId}')">x</button>`;
             newTab.onclick = function(event) {
                 switchTab(event, newTabId);
             };
@@ -132,7 +132,7 @@
             const newTabContent = document.createElement('div');
             newTabContent.id = newTabId;
             newTabContent.className = 'tab-content';
-            newTabContent.innerHTML = `<h1>Welcome to Tab ${tabCount}</h1><p>This is the content of Tab ${tabCount}.</p>`;
+            newTabContent.innerHTML = `<h1>Welcome to New Tab ${tabCount}</h1><p>This is the content of the new tab ${tabCount}.</p>`;
             document.body.appendChild(newTabContent);
 
             // Automatically switch to the newly created tab
@@ -142,12 +142,6 @@
         // Function to close a tab
         function closeTab(evt, tabId) {
             evt.stopPropagation(); // Prevent tab from switching when closing it
-
-            // Don't allow closing of the first tab
-            if (tabId === 'tab1') {
-                alert('Cannot close the first tab!');
-                return;
-            }
 
             // Remove the tab content
             const tabContent = document.getElementById(tabId);
@@ -161,13 +155,21 @@
                 tabElement.remove();
             }
 
-            // If the closed tab was active, switch to the first tab
+            // If the active tab is closed, switch to the first available tab
             if (tabElement.classList.contains('active')) {
-                const firstTab = document.querySelector('.tab[data-tab="tab1"]');
-                firstTab.classList.add('active');
-                document.getElementById('tab1').classList.add('active');
+                const remainingTabs = document.querySelectorAll('.tab');
+                if (remainingTabs.length > 0) {
+                    const firstRemainingTab = remainingTabs[0];
+                    firstRemainingTab.classList.add('active');
+                    const firstTabId = firstRemainingTab.getAttribute('data-tab');
+                    document.getElementById(firstTabId).classList.add('active');
+                } else {
+                    // If no tabs remain, add a new default tab
+                    addNewTab();
+                }
             }
         }
     </script>
 </body>
 </html>
+
